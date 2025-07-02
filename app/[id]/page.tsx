@@ -13,7 +13,10 @@ export default function RedirectShortURL(){
     useEffect(()=>{
         console.log("beginning redirecting process");
         fetch("/api/redirect",{
-            method:'POST'
+            method:'POST',
+            body:JSON.stringify({
+                hash:'0000000'
+            })
         })
         .then(res=>res.json())
         .then(res=>router.replace(res.redirectTo))

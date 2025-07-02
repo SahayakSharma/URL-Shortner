@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup } from "firebase/auth";
-import { GoogleAuthProvider,signInWithRedirect } from "firebase/auth";
-import { redirect } from "next/navigation";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 
@@ -14,14 +13,15 @@ const fbConfig = {
     appId: process.env.NEXT_PUBLIC_appId
 };
 
-const app=initializeApp(fbConfig)
-const auth=getAuth(app)
 
 
 export class firebaseConfig {
     private static instance: firebaseConfig;
+    private app;
+    private auth;
     private constructor() {
-        
+        this.app=initializeApp(fbConfig)
+        this.auth=getAuth(this.app);
     }
 
     public static getInstance() {
@@ -32,13 +32,13 @@ export class firebaseConfig {
     }
 
     getApp(){
-        return app
+        return this.app
     }
 
     getAuth(){
-        return auth
+        return this.auth
     }
     googleSignIn(){
-        signInWithPopup(auth,provider)
+        signInWithPopup(this.auth,provider)
     }
 }

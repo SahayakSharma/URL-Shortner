@@ -3,14 +3,13 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/authContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { Poppins } from 'next/font/google';
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'], // choose the weights you need
+  variable: '--font-poppins',   // optional CSS variable
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -26,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${poppins.className} antialiased`}
       >
         <AuthProvider>
           {children}
